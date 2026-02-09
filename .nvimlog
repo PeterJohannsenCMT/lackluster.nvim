@@ -1,0 +1,4 @@
+WRN 2026-02-09T18:15:51.982 ?.13002    server_start:199: Failed to start server: operation not permitted: /var/folders/dn/fbknnvwj3qg8mb5ld5g4ph2m0000gn/T/nvim.peterdanieljohannsen/rjhTYw/nvim.13002.0
+WRN 2026-02-09T18:16:58.200 ?.15298    server_start:199: Failed to start server: operation not permitted: /var/folders/dn/fbknnvwj3qg8mb5ld5g4ph2m0000gn/T/nvim.peterdanieljohannsen/Desqtr/nvim.15298.0
+WRN 2026-02-09T18:20:10.935 ?.23264    server_start:199: Failed to start server: operation not permitted: /var/folders/dn/fbknnvwj3qg8mb5ld5g4ph2m0000gn/T/nvim.peterdanieljohannsen/Srmm7k/nvim.23264.0
+WRN 2026-02-09T18:20:20.222 ?.23293    server_start:199: Failed to start server: operation not permitted: /var/folders/dn/fbknnvwj3qg8mb5ld5g4ph2m0000gn/T/nvim.peterdanieljohannsen/lpd5yg/nvim.23293.0

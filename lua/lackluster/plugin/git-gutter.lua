@@ -6,8 +6,15 @@ return function(theme)
     return {
         plugin_name = "git_gutter",
         highlight = {
-            spec.fg("GitGutterAdd", theme.diff.info),
-            spec.fg("GitGutterAddLineNr", theme.diff.info),
+            spec.fg("GitGutterAdd", theme.diff.add),
+            spec.ln("GitGutterChangeDelete", "GitGutterChange"),
+
+            spec.ln("GitGutterAddLine", "DiffAdd"),
+            spec.ln("GitGutterChangeLine", "DiffChange"),
+            spec.ln("GitGutterDeleteLine", "DiffDelete"),
+            spec.ln("GitGutterChangeDeleteLine", "DiffChange"),
+
+            spec.fg("GitGutterAddLineNr", theme.diff.add),
             spec.fg("GitGutterChange", theme.diff.change),
             spec.fg("GitGutterChangeLineNr", theme.diff.change),
             spec.fg("GitGutterDelete", theme.diff.delete),

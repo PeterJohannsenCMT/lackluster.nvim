@@ -4,7 +4,7 @@
 
 ---@class LacklusterColorSpecial
 return {
-    main_background = "#101010",
+    main_background = "#000000",
     menu_background = "#191919",
     popup_background = "#1A1A1A",
     statusline = "#242424",

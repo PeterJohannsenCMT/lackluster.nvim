@@ -26,6 +26,54 @@ local M = {
     dev = dev,
 }
 
+local apply_git_signs_links = function()
+    local map = {
+        GitSignsAdd = "DiffAdd",
+        GitSignsChange = "DiffChange",
+        GitSignsDelete = "DiffDelete",
+        GitSignsTopdelete = "DiffDelete",
+        GitSignsChangedelete = "DiffChange",
+        GitSignsUntracked = "DiffAdd",
+        GitSignsAddNr = "DiffAdd",
+        GitSignsChangeNr = "DiffChange",
+        GitSignsDeleteNr = "DiffDelete",
+        GitSignsTopdeleteNr = "DiffDelete",
+        GitSignsChangedeleteNr = "DiffChange",
+        GitSignsUntrackedNr = "DiffAdd",
+        GitSignsAddLn = "DiffAdd",
+        GitSignsChangeLn = "DiffChange",
+        GitSignsDeleteLn = "DiffDelete",
+        GitSignsChangedeleteLn = "DiffChange",
+        GitSignsUntrackedLn = "DiffAdd",
+    }
+    for name, link in pairs(map) do
+        vim.api.nvim_set_hl(0, name, { link = link })
+    end
+end
+
+local setup_git_signs_link_autocmd = function()
+    if vim.g.lackluster_git_signs_link_autocmd == true then
+        return
+    end
+    vim.g.lackluster_git_signs_link_autocmd = true
+
+    local group = vim.api.nvim_create_augroup("lackluster_git_signs_link", { clear = true })
+    vim.api.nvim_create_autocmd("ColorScheme", {
+        group = group,
+        pattern = "lackluster*",
+        callback = function()
+            vim.schedule(apply_git_signs_links)
+        end,
+    })
+    vim.api.nvim_create_autocmd("User", {
+        group = group,
+        pattern = "GitsignsAttach",
+        callback = function()
+            vim.schedule(apply_git_signs_links)
+        end,
+    })
+end
+
 ---@class LacklusterConfigTweakSyntax
 ---@field string ?string
 ---@field string_escape ?string
@@ -252,6 +300,18 @@ local highlight_apply = function(config)
                     vim.notify("error: duplicate hi_spec :: " .. hl_name, vim.log.levels.ERROR)
                 else
                     dedup_set[hl_name] = true
+                    -- Allow structured color values such as `{ fg = "#rrggbb", bg = "#rrggbb" }`.
+                    -- This keeps existing string-based highlights working while enabling optional bg.
+                    if type(hl_spec.fg) == "table" then
+                        local fg = hl_spec.fg
+                        hl_spec.fg = fg.fg
+                        if hl_spec.bg == nil and fg.bg ~= nil then
+                            hl_spec.bg = fg.bg
+                        end
+                    end
+                    if type(hl_spec.bg) == "table" then
+                        hl_spec.bg = hl_spec.bg.bg
+                    end
                     hl_spec.name = nil -- must set to nil so that nvim_set_hl doesn't freak out
                     --- @diagnostic disable-next-line: param-type-mismatch
                     vim.api.nvim_set_hl(0, hl_name, hl_spec)
@@ -275,6 +335,8 @@ M.load = function(opt)
 
     load_variant(opt)
     highlight_apply(USER_CONFIG)
+    setup_git_signs_link_autocmd()
+    vim.schedule(apply_git_signs_links)
 end
 
 return M

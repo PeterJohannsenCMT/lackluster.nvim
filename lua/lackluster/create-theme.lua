@@ -41,7 +41,7 @@ return function(color, color_special)
 
         fg_border = color.gray4,
         bg_colorcolumn = color.gray1,
-        bg_cursorline = color.gray2,
+        bg_cursorline = color.gray1,
 
         bg_visual = color.gray8,
         fg_visual = color.black,
@@ -174,10 +174,10 @@ return function(color, color_special)
 
     ---@class LacklusterThemeDiff
     result.diff = {
-        add = color.green,
-        change = color.gray6,
-        delete = color.orange,
-        info = color.gray5,
+        add = color.diff.add,
+        change = color.diff.change,
+        delete = color.diff.delete,
+        info = color.diff.info,
     }
 
     ---@class LacklusterThemePluginTelescope

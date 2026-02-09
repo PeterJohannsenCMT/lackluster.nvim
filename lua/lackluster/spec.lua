@@ -29,11 +29,14 @@ M.co = function(name, fg, bg, opts)
     })
 end
 
---- set only foreground
+--- set foreground, optionally with background when passing `{ fg=..., bg=... }`
 --- @param name string
---- @param fg string
+--- @param fg string|{fg:string,bg:?string}
 --- @return LacklusterHighlightSpec
 M.fg = function(name, fg)
+    if type(fg) == "table" then
+        return M.co(name, fg.fg, fg.bg or "none")
+    end
     return M.co(name, fg, "none")
 end
 
