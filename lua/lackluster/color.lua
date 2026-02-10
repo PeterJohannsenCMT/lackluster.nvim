@@ -23,6 +23,10 @@ return {
     diff = {
 			delete = {fg = "#D70000", bg = "#200000"},
 			add = {fg = "#20c020", bg = "#002000"},
+			delete_cursor = {fg = "#D70000", bg = "#300000"},
+			add_cursor = {fg = "#20c020", bg = "#003000"},
+			hunk = {fg = "#dddddd", bg = "#333333"},
+			context_cursor = {fg = "#dddddd", bg = "#222222"},
 			change = "#808080",
 			info = "#808080",
 		}

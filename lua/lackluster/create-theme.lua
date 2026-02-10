@@ -175,9 +175,13 @@ return function(color, color_special)
     ---@class LacklusterThemeDiff
     result.diff = {
         add = color.diff.add,
+        add_cursor = color.diff.add_cursor,
         change = color.diff.change,
         delete = color.diff.delete,
+        delete_cursor = color.diff.delete_cursor,
+        context_cursor = color.diff.context_cursor,
         info = color.diff.info,
+        hunk = color.diff.hunk,
     }
 
     ---@class LacklusterThemePluginTelescope
@@ -201,9 +205,9 @@ return function(color, color_special)
 
     ---@class LacklusterThemePluginWhichKey
     result.plugin_which_key = {
-        key = color.gray5,
-        group = color.lack,
-        separator = color.gray4,
+        key = color.black,
+        group = color.gray1,
+        separator = color.gray1,
     }
 
     ---@class LacklusterThemePluginLazy

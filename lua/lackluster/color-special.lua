@@ -6,7 +6,7 @@
 return {
     main_background = "#000000",
     menu_background = "#191919",
-    popup_background = "#1A1A1A",
+    popup_background = "#aaaaaa",
     statusline = "#242424",
     comment = "#3A3A3A",
     exception = "#505050",
