@@ -7,10 +7,27 @@ local spec = require("lackluster.spec")
 
 -- TODO: ?? refactor theme and highlight() so that highlight() does not need color or special
 
+local function plugin_modules()
+    local highlight_file = debug.getinfo(1, "S").source:sub(2)
+    local plugin_dir = vim.fn.fnamemodify(highlight_file, ":h") .. "/plugin"
+    local plugin_files = vim.fn.readdir(plugin_dir, [[v:val =~# '\.lua$']])
+
+    table.sort(plugin_files)
+
+    local modules = {}
+    for _, file in ipairs(plugin_files) do
+        if file ~= "init.lua" then
+            modules[#modules + 1] = "lackluster.plugin." .. file:gsub("%.lua$", "")
+        end
+    end
+
+    return modules
+end
+
 ---@param theme LacklusterTheme
 ---@return LacklusterHighlightGroup[]
 local highlight = function(theme, color)
-    return {
+    local groups = {
         {
             dont_skip = true,
             highlight = {
@@ -30,7 +47,7 @@ local highlight = function(theme, color)
                 spec.bg("ColorColumn", theme.ui.bg_colorcolumn),
 
                 -- SEARCH
-                spec.co("Search", theme.ui.fg_search, theme.ui.bg_search_item),
+                spec.co("Search", "#ffffff", theme.ui.bg_search_item),
                 spec.co("CurSearch", theme.ui.fg_search, theme.ui.bg_search_cur),
                 spec.ln("IncSearch", "CurSearch"),
                 spec.ln("Substitute", "Search"),
@@ -121,7 +138,7 @@ local highlight = function(theme, color)
                 spec.fg("DiagnosticWarn", theme.diagnostic.text),
                 spec.fg("DiagnosticError", theme.diagnostic.error),
                 spec.fg("DiagnosticDeprecated", theme.diagnostic.text),
-                spec.fg("DiagnosticUnnecessary", theme.diagnostic.text),
+                spec.fg("DiagnosticUnnecessary", theme.syntax.comment),
 
                 spec.fg("DiagnosticVirtualTextOk", theme.diagnostic.text),
                 spec.fg("DiagnosticVirtualTextHint", theme.diagnostic.text),
@@ -348,35 +365,13 @@ local highlight = function(theme, color)
                 spec.fg("DevIconDefault", theme.ui.fg_icon),
             },
         },
-        require("lackluster.plugin.cmp")(theme),
-        require("lackluster.plugin.flash")(theme),
-        require("lackluster.plugin.git-gutter")(theme),
-        require("lackluster.plugin.git-signs")(theme),
-        require("lackluster.plugin.lazy")(theme),
-        require("lackluster.plugin.lightbulb")(theme),
-        require("lackluster.plugin.lsp-config")(theme),
-        require("lackluster.plugin.mason")(theme),
-        require("lackluster.plugin.oil")(theme),
-        require("lackluster.plugin.rainbow-delimiter")(theme),
-        require("lackluster.plugin.telescope")(theme),
-        require("lackluster.plugin.todo-comments")(theme),
-        require("lackluster.plugin.tree")(theme),
-        require("lackluster.plugin.trouble")(theme),
-        require("lackluster.plugin.which-key")(theme),
-        require("lackluster.plugin.notify")(theme),
-        require("lackluster.plugin.navic")(theme),
-        require("lackluster.plugin.yanky")(theme),
-        require("lackluster.plugin.headlines")(theme),
-        require("lackluster.plugin.noice")(theme),
-        require("lackluster.plugin.dashboard")(theme),
-        require("lackluster.plugin.scrollbar")(theme),
-        require("lackluster.plugin.bufferline")(theme),
-        require("lackluster.plugin.indentmini")(theme),
-        require("lackluster.plugin.neogit")(theme),
-        -- TODO: decide if each individual mini plugin should be opt in
-        -- can wait until all are supported before deciding
-        require("lackluster.plugin.mini")(theme),
     }
+
+    for _, module_name in ipairs(plugin_modules()) do
+        groups[#groups + 1] = require(module_name)(theme)
+    end
+
+    return groups
 end
 
 return highlight

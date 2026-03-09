@@ -6,9 +6,10 @@
 return {
     main_background = "#000000",
     menu_background = "#191919",
-    popup_background = "#aaaaaa",
+    popup_background = "#ffffff",
+    popup_foreground = "#000000",
     statusline = "#242424",
-    comment = "#3A3A3A",
+    comment = "#4F4F4F",
     exception = "#505050",
     keyword = "#666666",
     param = "#8E8E8E",

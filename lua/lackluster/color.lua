@@ -1,5 +1,5 @@
 ---@class LacklusterColor
-return {
+local color = {
     lack = "#757575",
     luster = "#a6a6a6",
     orange = "#868686",
@@ -20,14 +20,22 @@ return {
     gray8 = "#eeeeee",
     gray9 = "#ffffff",
 
-    diff = {
-			delete = {fg = "#D70000", bg = "#200000"},
-			add = {fg = "#20c020", bg = "#002000"},
-			delete_cursor = {fg = "#D70000", bg = "#300000"},
-			add_cursor = {fg = "#20c020", bg = "#003000"},
-			hunk = {fg = "#dddddd", bg = "#333333"},
-			context_cursor = {fg = "#dddddd", bg = "#222222"},
-			change = "#808080",
-			info = "#808080",
-		}
+    cursor_line = "#0f0f0f",
+
+    inline_hints_fg = "#8080b0",
+    inline_hints_bg = "none",
 }
+
+color.diff = {
+    delete = { fg = color.gray8, bg = "#4a221d" },
+    add = { fg = color.gray8, bg = "#223a2b" },
+    delete_cursor = { fg = color.gray8, bg = "#542722" },
+    add_cursor = { fg = color.gray8, bg = "#294433" },
+    hunk = { fg = "#dddddd", bg = "#282828" },
+    hunk_cursor = { fg = "#cccccc", bg = "#383838" },
+    context_cursor = { fg = "#dddddd", bg = "#222222" },
+    change = "#606080",
+    info = "#808080",
+}
+
+return color

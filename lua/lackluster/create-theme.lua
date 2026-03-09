@@ -16,7 +16,7 @@ return function(color, color_special)
 
         fg_icon = color.gray4,
 
-        fg_button = color.gray5,
+        fg_button = color_special.popup_foreground,
         bg_button = color_special.popup_background,
 
         fg_button_active = color.gray4,
@@ -41,19 +41,19 @@ return function(color, color_special)
 
         fg_border = color.gray4,
         bg_colorcolumn = color.gray1,
-        bg_cursorline = color.gray1,
+        bg_cursorline = color.cursor_line,
 
         bg_visual = color.gray8,
         fg_visual = color.black,
 
         fg_search = color.black,
-        bg_search_item = color.lack,
-        bg_search_cur = color.gray8,
+        bg_search_item = color.gray2,
+        bg_search_cur = color.gray5,
 
         bg_scrollbar = color.gray3,
         fg_scrollbar = color.gray5,
 
-        fg_popup = color.gray6,
+        fg_popup = color_special.popup_foreground,
         bg_popup = color_special.popup_background,
 
         fg_menu = color.gray6,
@@ -182,6 +182,7 @@ return function(color, color_special)
         context_cursor = color.diff.context_cursor,
         info = color.diff.info,
         hunk = color.diff.hunk,
+        hunk_cursor = color.diff.hunk_cursor,
     }
 
     ---@class LacklusterThemePluginTelescope

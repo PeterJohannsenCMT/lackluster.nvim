@@ -9,6 +9,9 @@ return function(theme)
             spec.fg("GitSignsAdd", theme.diff.add),
             spec.fg("GitSignsChange", theme.diff.change),
             spec.fg("GitSignsDelete", theme.diff.delete),
+
+            spec.fg("GitSignsCurrentLineBlame", theme.diff.change),
+
             spec.ln("GitSignsTopdelete", "GitSignsDelete"),
             spec.ln("GitSignsChangedelete", "GitSignsChange"),
             spec.ln("GitSignsUntracked", "GitSignsAdd"),

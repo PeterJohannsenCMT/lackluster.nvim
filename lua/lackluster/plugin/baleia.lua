@@ -12,8 +12,9 @@ local highlight_pairs = {
 return function(theme)
     local highlight = {}
     for i, pair in ipairs(highlight_pairs) do
-        highlight[i] = spec.fg(pair.name, pair.fg, {})
+        highlight[i] = spec.fg(pair.name, pair.fg)
     end
+
     return {
         plugin_name = "baleia",
         highlight = highlight,
